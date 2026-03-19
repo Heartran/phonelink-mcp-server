@@ -1,0 +1,50 @@
+# Dependencies & build output
+**/node_modules/
+**/dist/
+
+# Temporary files
+.temp/
+
+# Keep empty directories
+!*/.gitkeep
+
+# IDE / editor
+.DS_Store
+.idea/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Env and local config
+.env
+.env.*.local
+*.local
+
+# Testing / coverage / tooling
+coverage/
+.nyc_output/
+.turbo/
+
+# HTTPS dev certs (mkcert)
+*.pem
+*.key
+*.crt
+
+
+# Local references for AI Agents
+docs and references/plan.md
+/.runner
+
+# Windows executable files
+*.exe
+
+# Firebase Studio Environment
+.idx/
+
+# Python cache
+tools/ticket_qr_generator/out/
+tools/ticket_qr_generator/__pycache__/
