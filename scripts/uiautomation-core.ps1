@@ -337,7 +337,11 @@ function Get-PhoneLinkConnectionSnapshot {
     $phoneName = ($statusTexts | Where-Object { $_.automation -eq "PhoneNameTextBlock" } | Select-Object -First 1).text
     if (-not $phoneName) { $phoneName = "" }
 
-    $statusMsg = ($statusTexts | Where-Object { $_.automation -eq "ConnectivityStatusTextBlock" } | Select-Object -First 1).text
+    $statusMsg = ($statusTexts | Where-Object {
+        $_.automation -eq "ConnectivityCardOpenButton" -or
+        $_.automation -eq "ConnectivityStatusTextBlock" -or
+        $_.text -match '(?i)(connesso|connected|disconnesso|disconnected)'
+    } | Select-Object -First 1).text
     if (-not $statusMsg) { $statusMsg = "" }
 
     if ($statusMsg -match '(?i)\b(connected|connesso|collegato)\b') {
