@@ -29,7 +29,7 @@ export async function handleGetStatus() {
 export async function handleGetMessages(params) {
     try {
         const args = {
-            NavigateToTab: params.navigate_to_tab,
+            NavigateToTab: params.navigate_to_tab === true || params.navigate_to_tab === "true",
             MaxMessages: params.max_messages,
         };
         if (params.conversation_name) {
