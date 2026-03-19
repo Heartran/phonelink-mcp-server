@@ -158,7 +158,7 @@ export async function runPowerShellScript(scriptName, args = {}, timeoutMs = PS_
     ];
     for (const [key, value] of Object.entries(args)) {
         if (typeof value === "boolean") {
-            psArgs.push(`-${key}:$${value}`);
+            psArgs.push(`-${key}:${value}`);
         }
         else {
             psArgs.push(`-${key}`, String(value));
