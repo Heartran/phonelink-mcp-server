@@ -48,3 +48,4 @@ docs and references/plan.md
 # Python cache
 tools/ticket_qr_generator/out/
 tools/ticket_qr_generator/__pycache__/
+debug-ui.json
