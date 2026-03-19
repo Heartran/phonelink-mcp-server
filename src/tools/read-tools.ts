@@ -45,7 +45,7 @@ export async function handleGetMessages(params: {
 }): Promise<ReturnType<typeof formatOutput>> {
   try {
     const args: Record<string, string | number | boolean> = {
-      NavigateToTab: params.navigate_to_tab,
+      NavigateToTab: params.navigate_to_tab === true || (params.navigate_to_tab as unknown) === "true",
       MaxMessages: params.max_messages,
     };
     if (params.conversation_name) {
