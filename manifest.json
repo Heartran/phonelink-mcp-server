@@ -3,10 +3,14 @@
   "name": "Phone Link MCP",
   "description": "Read and control your phone via Phone Link (MyPhone) Windows app. Access messages, calls, notifications, and photos without public APIs.",
   "version": "1.0.0",
-  "icon": "icon.png",
   "author": {
-    "name": "Heartran"
+    "name": "Heartran",
+    "email": "heartran@papin-network.it",
+    "url": "https://github.com/Heartran"
   },
+  "homepage": "https://github.com/Heartran/phonelink-mcp-server",
+  "documentation": "https://github.com/Heartran/phonelink-mcp-server/wiki",
+  "icon": "icon.png",
   "server": {
     "type": "node",
     "entry_point": "dist/index.js",
