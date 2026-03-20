@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(mcpb --help)",
+      "Bash(mcpb help:*)",
+      "Bash(mcpb init:*)",
+      "Bash(mcpb validate:*)"
     ]
   }
 }

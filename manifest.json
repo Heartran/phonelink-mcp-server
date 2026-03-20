@@ -1,6 +1,22 @@
 {
+  "manifest_version": "0.2",
   "name": "Phone Link MCP",
   "description": "Read and control your phone via Phone Link (MyPhone) Windows app. Access messages, calls, notifications, and photos without public APIs.",
   "version": "1.0.0",
-  "icon": "icon.png"
+  "icon": "icon.png",
+  "author": {
+    "name": "Heartran"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {}
+    }
+  },
+  "license": "MIT"
 }
