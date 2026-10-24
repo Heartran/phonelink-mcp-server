@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Core UIAutomation helpers for Phone Link MCP Server.
     Provides functions to find, read, and interact with Phone Link UI elements.
@@ -59,7 +59,7 @@ function Find-PhoneLinkWindow {
     #>
     $root = $Automation::RootElement
 
-    $names = @("Phone Link", "Collegamento al telefono", "Il tuo telefono", "Your Phone")
+    $names = @("Phone Link", "Collegamento al telefono", "Il tuo telefono", "Your Phone", "手机连接", "連結至手機")
     foreach ($name in $names) {
         $cond = New-Object System.Windows.Automation.PropertyCondition(
             $Automation::NameProperty, $name
@@ -131,10 +131,10 @@ function Get-ElementInfo {
             IsEnabled    = $isEnabled
             Value        = $value
             BoundingRect = @{
-                X      = [math]::Round($rect.X)
-                Y      = [math]::Round($rect.Y)
-                Width  = [math]::Round($rect.Width)
-                Height = [math]::Round($rect.Height)
+                X      = $(if ([double]::IsInfinity($rect.X) -or [double]::IsNaN($rect.X)) { $null } else { [math]::Round($rect.X) })
+                Y      = $(if ([double]::IsInfinity($rect.Y) -or [double]::IsNaN($rect.Y)) { $null } else { [math]::Round($rect.Y) })
+                Width  = $(if ([double]::IsInfinity($rect.Width) -or [double]::IsNaN($rect.Width)) { $null } else { [math]::Round($rect.Width) })
+                Height = $(if ([double]::IsInfinity($rect.Height) -or [double]::IsNaN($rect.Height)) { $null } else { [math]::Round($rect.Height) })
             }
         }
     } catch {
@@ -340,13 +340,13 @@ function Get-PhoneLinkConnectionSnapshot {
     $statusMsg = ($statusTexts | Where-Object {
         $_.automation -eq "ConnectivityCardOpenButton" -or
         $_.automation -eq "ConnectivityStatusTextBlock" -or
-        $_.text -match '(?i)(connesso|connected|disconnesso|disconnected)'
+        $_.text -match '已连接|已連線|未连接|未連線|已断开|已中斷連線|(?i)(connesso|connected|disconnesso|disconnected)'
     } | Select-Object -First 1).text
     if (-not $statusMsg) { $statusMsg = "" }
 
-    if ($statusMsg -match '(?i)\b(connected|connesso|collegato)\b') {
+    if ($statusMsg -match '^(已连接|已連線)$|(?i)\b(connected|connesso|collegato)\b') {
         $connected = $true
-    } elseif ($statusMsg -match '(?i)\b(disconnected|disconnesso|non collegato)\b') {
+    } elseif ($statusMsg -match '未连接|未連線|已断开|已中斷連線|(?i)\b(disconnected|disconnesso|non collegato)\b') {
         $connected = $false
     }
 
@@ -361,12 +361,12 @@ function Get-PhoneLinkConnectionSnapshot {
             $statusMsg = $t
         }
 
-        if ($t -match '^(?i)(connected|connesso|collegato)$') {
+        if ($t -match '^(?i)(connected|connesso|collegato|已连接|已連線)$') {
             $connected = $true
             if (-not $statusMsg) { $statusMsg = $t }
         }
 
-        if ($t -match '^(?i)(disconnected|disconnesso|non collegato)$') {
+        if ($t -match '^(?i)(disconnected|disconnesso|non collegato|未连接|未連線|已断开|已中斷連線)$') {
             $connected = $false
             if (-not $statusMsg) { $statusMsg = $t }
         }
